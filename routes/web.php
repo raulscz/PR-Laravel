@@ -29,3 +29,10 @@ Route::put('/modificarPersona',[PersonaController::class, 'modificarPersonaPut']
 
 /*Eliminar*/
 Route::delete('/eliminarPersona/{id}', [PersonaController::class, 'eliminarPersona']);
+
+/*LogIn y LogOut*/
+Route::get('',[PersonaController::class, 'login']);
+
+Route::post('login',[PersonaController::class, 'loginPost']);
+
+Route::get('logout',[PersonaController::class, 'logout']);

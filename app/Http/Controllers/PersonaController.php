@@ -25,6 +25,15 @@ class PersonaController extends Controller
 
     public function crearPersonaPost(Request  $request){
         $datos = $request->except('_token');
+        $request->validate([
+            'nombre_persona'=>'required|string|max:30',
+            'apellido_persona'=>'required|string|max:30',
+            'dni_persona'=>'required|string|max:10|min:10',
+            'edad_persona'=>'required|int|min:18|max:130',
+            'num_telf'=>'required|string|min:9|max:9',
+            'num_telf2'=>'required|string|min:9|max:9',
+            'foto_persona'=>'required|mimes:jpg,png,jpeg,webp,svg'
+        ]);
         if($request->hasFile('foto_persona')){
             $datos['foto_persona'] = $request->file('foto_persona')->store('uploads','public');
         }else{
@@ -86,6 +95,36 @@ class PersonaController extends Controller
             return $e->getMessage();
         }
         return redirect('mostrar');
+    }
+
+    /*LogIn y LogOut*/
+    public function login(){
+        return view('login');
+    }
+
+    public function loginPost(Request $request){
+        $datos = $request->except('_token','_method');
+        $user = DB::table("tbl_emp")->where('correo_emp','=',$datos['correo_emp'])->where('pass_emp','=',$datos['pass_emp'])->count();
+        if($user == 1){
+            //Establecemos session y lo enviamos a la pag que toca
+            $rol = DB::table("tbl_emp")->select('rol_emp')->where('correo_emp','=',$datos['correo_emp'])->where('pass_emp','=',$datos['pass_emp'])->first();
+            if($rol->rol_emp =="Administrador"){
+                $request->session()->put('nombre_admin',$request->correo_emp);
+            }
+            return redirect('/mostrar');
+        }else{
+            //No establecemos session y lo enviamos a login
+            return redirect('');
+        }
+        return $user;
+    }
+
+    public function logout(Request $request){
+        //Olvidas
+        $request->session()->forget('nombre_admin');
+        //Eliminar todo
+        $request->session()->flush();
+        return redirect('/');
     }
 
     /**

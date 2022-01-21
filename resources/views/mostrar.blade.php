@@ -1,3 +1,9 @@
+@if (!Session::get('nombre_admin'))
+    <?php
+        //Si la session no esta definida te redirige al login.
+        return redirect()->to('/')->send();
+    ?>
+@endif
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +19,9 @@
         <form action="{{url('crear')}}" method="GET">
             <button class= "botonCre" type="submit" name="Crear" value="Crear">Crear</button>
         </form>
+        <form action="{{url('logout')}}" method="GET">
+            <button id="logout" class= "botonCre" type="submit" name="logout" value="logout">Logout</button>
+        </form>
     </div>
     <div class="row flex-cv">
         <table class="table">
@@ -25,6 +34,7 @@
                 <th>EDAD</th>
                 <th>TELEFONO</th>
                 <th>TELEFONO 2</th>
+                <th>EMAIL</th>
                 <th>ELIMINAR</th>
                 <th>MODIFICAR</th>
             </tr>
@@ -38,6 +48,7 @@
                     <td>{{$persona->edad_persona}}</td>
                     <td>{{$persona->num_telf}}</td>
                     <td>{{$persona->num_telf2}}</td>
+                    <td>{{$persona->correo_persona}}</td>
                     <td><form action="{{url('eliminarPersona/'.$persona->id)}}" method="POST">
                         @csrf
                         <!--{{csrf_field()}}--->
