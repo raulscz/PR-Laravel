@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 use App\Http\Controllers\Exception;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\EnviarMensaje;
+use Illuminate\Support\Facades\Mail;
 
 class PersonaController extends Controller
 {
@@ -126,7 +128,22 @@ class PersonaController extends Controller
         $request->session()->flush();
         return redirect('/');
     }
+    /*Correo*/
+    public function correoPersona(Request $request){
+        $form = $request->except('_token');
+        $msj = $form['mensaje'];
+        $sub = $form['sub'];
+        $datos = array('message'=>$msj);
+        $enviar = new EnviarMensaje($datos);
+        $enviar -> sub = $sub;
+        Mail::to($form['correo_persona'])->send($enviar);
+        return redirect('/mostrar');
+    }
 
+    public function correoPersona2($correo_persona){
+        return view('mostrarCorreo',compact('correo_persona'));
+    }
+    
     /**
      * Display a listing of the resource.
      *

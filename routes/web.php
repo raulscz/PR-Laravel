@@ -36,3 +36,8 @@ Route::get('',[PersonaController::class, 'login']);
 Route::post('login',[PersonaController::class, 'loginPost']);
 
 Route::get('logout',[PersonaController::class, 'logout']);
+
+/*Correo*/
+Route::get('correoPersona2/{correo_persona}',[PersonaController::class, 'correoPersona2']);
+
+Route::post('recibirCorreo',[PersonaController::class, 'correoPersona']);

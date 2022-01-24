@@ -37,6 +37,7 @@
                 <th>EMAIL</th>
                 <th>ELIMINAR</th>
                 <th>MODIFICAR</th>
+                <th>CORREO</th>
             </tr>
             @foreach($listaPersona as $persona)
                 <tr>
@@ -58,6 +59,9 @@
                     </form></td>
                     <td><form action="{{url('modificarPersona/'.$persona->id)}}" method="GET">
                         <button class= "botonAct" type="submit" name="Modificar" value="Modificar">Modificar</button>
+                    </form></td>
+                    <td><form action="{{url('correoPersona2/'.$persona->correo_persona)}}" method="GET">
+                        <button class= "botonAct" type="submit" name="Correo" value="Correo">Correo</button>
                     </form></td>
                 </tr>
             @endforeach
