@@ -10,6 +10,7 @@ use App\Http\Controllers\Exception;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\EnviarMensaje;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PersonaCrear;
 
 class PersonaController extends Controller
 {
@@ -25,7 +26,7 @@ class PersonaController extends Controller
         return view('crear');
     }
 
-    public function crearPersonaPost(Request  $request){
+    public function crearPersonaPost(PersonaCrear  $request){
         $datos = $request->except('_token');
         $request->validate([
             'nombre_persona'=>'required|string|max:30',
