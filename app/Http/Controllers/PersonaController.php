@@ -144,7 +144,12 @@ class PersonaController extends Controller
     public function correoPersona2($correo_persona){
         return view('mostrarCorreo',compact('correo_persona'));
     }
-    
+
+    /*Dinero*/
+    public function enviarDinero($precio){
+        return $precio;
+    }
+
     /**
      * Display a listing of the resource.
      *

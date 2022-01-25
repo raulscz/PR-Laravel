@@ -38,6 +38,7 @@
                 <th>ELIMINAR</th>
                 <th>MODIFICAR</th>
                 <th>CORREO</th>
+                <th>DINERO<th>
             </tr>
             @foreach($listaPersona as $persona)
                 <tr>
@@ -61,7 +62,10 @@
                         <button class= "botonAct" type="submit" name="Modificar" value="Modificar">Modificar</button>
                     </form></td>
                     <td><form action="{{url('correoPersona2/'.$persona->correo_persona)}}" method="GET">
-                        <button class= "botonAct" type="submit" name="Correo" value="Correo">Correo</button>
+                        <button class= "botonEli" type="submit" name="Correo" value="Correo">Correo</button>
+                    </form></td>
+                    <td><form action="{{url('enviarDinero/10')}}" method="GET">
+                        <button class= "botonAct" type="submit" name="Pagar" value="Pagar">Pagar</button>
                     </form></td>
                 </tr>
             @endforeach
