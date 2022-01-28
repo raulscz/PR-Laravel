@@ -43,4 +43,6 @@ Route::get('correoPersona2/{correo_persona}',[PersonaController::class, 'correoP
 Route::post('recibirCorreo',[PersonaController::class, 'correoPersona']);
 
 /*Dinero*/
-Route::get('enviarDinero/{precio}',[PersonaController::class, 'enviarDinero']);
+Route::get('enviarDinero/{precio}/{id}',[PersonaController::class, 'enviarDinero']);
+
+Route::get('comprado/{id}',[PersonaController::class, 'compra']);
