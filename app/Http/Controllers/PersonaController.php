@@ -52,7 +52,7 @@ class PersonaController extends Controller
             DB::rollBack();
             return $e->getMessage();
         }
-        //return redirect('mostrar');
+        return redirect('mostrar');
     }
 
     /*Actualizar*/
